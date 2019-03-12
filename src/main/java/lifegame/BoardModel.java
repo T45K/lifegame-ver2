@@ -31,7 +31,7 @@ public class BoardModel {
 		}
 	}
 
-	public boolean isAlive(final int x, final int y) {
+	private boolean isAlive(final int x, final int y) {
 		return isInField(x, y) && this.board[x][y];
 	}
 
@@ -52,10 +52,10 @@ public class BoardModel {
 		return this.row;
 	}
 
-	public boolean isAliveNext(final int x, final int y) {
+	private boolean isAliveNext(final int x, final int y) {
 		final int numOfAliveCellsAroundTargetCell = (isAlive(x - 1, y - 1) ? 1 : 0) + (isAlive(x - 1, y) ? 1 : 0)
-				+ (isAlive(x - 1, y + 1) ? 1 : 0) + (isAlive(x, y - 1) ? 1 : 0) + (isAlive(x, y) ? 1 : 0)
-				+ (isAlive(x, y - 1) ? 1 : 0) + (isAlive(x + 1, y) ? 1 : 0) + (isAlive(x + 1, y + 1) ? 1 : 0);
+				+ (isAlive(x - 1, y + 1) ? 1 : 0) + (isAlive(x, y - 1) ? 1 : 0) + (isAlive(x, y + 1) ? 1 : 0)
+				+ (isAlive(x + 1, y - 1) ? 1 : 0) + (isAlive(x + 1, y) ? 1 : 0) + (isAlive(x + 1, y + 1) ? 1 : 0);
 		if (isAlive(x, y)) {
 			return numOfAliveCellsAroundTargetCell == 2 || numOfAliveCellsAroundTargetCell == 3 ? true : false;
 		} else {
@@ -63,7 +63,7 @@ public class BoardModel {
 		}
 	}
 
-	public boolean[][] getNextBoard() {
+	private boolean[][] getNextBoard() {
 		final boolean[][] nextBoard = new boolean[row][col];
 		for (int x = 0; x < row; x++) {
 			for (int y = 0; y < col; y++) {
