@@ -31,6 +31,14 @@ public class BoardModel {
 		}
 	}
 
+	public boolean isAlive(final int x, final int y) {
+		return isInField(x, y) && this.board[x][y];
+	}
+
+	private boolean isInField(final int x, final int y) {
+		return x >= 0 && x < row && y >= 0 && y < col;
+	}
+
 	public void changeCellState(final int x, final int y) {
 		this.board[x][y] = !this.board[x][y];
 		fireUpdate();
@@ -44,24 +52,43 @@ public class BoardModel {
 		return this.row;
 	}
 
-	public void next() {
-		final boolean[][] nextBoard = new boolean[row][col];
+	public boolean isAliveNext(final int x, final int y) {
+		final int numOfAliveCellsAroundTargetCell = (isAlive(x - 1, y - 1) ? 1 : 0) + (isAlive(x - 1, y) ? 1 : 0)
+				+ (isAlive(x - 1, y + 1) ? 1 : 0) + (isAlive(x, y - 1) ? 1 : 0) + (isAlive(x, y) ? 1 : 0)
+				+ (isAlive(x, y - 1) ? 1 : 0) + (isAlive(x + 1, y) ? 1 : 0) + (isAlive(x + 1, y + 1) ? 1 : 0);
+		if (isAlive(x, y)) {
+			return numOfAliveCellsAroundTargetCell == 2 || numOfAliveCellsAroundTargetCell == 3 ? true : false;
+		} else {
+			return numOfAliveCellsAroundTargetCell == 3 ? true : false;
+		}
+	}
 
-		if (this.boardHistory.size() > MAX_STACK_SIZE - 1) {
-			throw new RuntimeException("invalid");
-		} else if (this.boardHistory.size() == MAX_STACK_SIZE - 1) {
+	public boolean[][] getNextBoard() {
+		final boolean[][] nextBoard = new boolean[row][col];
+		for (int x = 0; x < row; x++) {
+			for (int y = 0; y < col; y++) {
+				nextBoard[x][y] = isAliveNext(x, y);
+			}
+		}
+		return nextBoard;
+	}
+
+	public void next() {
+		if (this.boardHistory.size() == MAX_STACK_SIZE - 1) {
 			boardHistory.removeFirst();
 		}
 
 		this.boardHistory.addLast(this.board.clone());
-		this.board = nextBoard;
+		this.board = getNextBoard();
+		fireUpdate();
 	}
-	
+
 	public void undo() {
-		this.board = this.boardHistory.getLast();
+		this.board = this.boardHistory.removeLast();
+		fireUpdate();
 	}
-	
-	public int isUndoable() {
-		return this.boardHistory.size();
+
+	public boolean isUndoable() {
+		return this.boardHistory.size() != 0;
 	}
 }
