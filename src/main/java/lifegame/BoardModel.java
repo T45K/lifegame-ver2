@@ -97,11 +97,15 @@ public class BoardModel implements ActionListener {
         return this.boardHistory.size() != 0;
     }
 
+    public int remainingUndoable() {
+        return this.boardHistory.size();
+    }
+
     @Override
     public void actionPerformed(final ActionEvent e) {
         if (e.getSource() instanceof NextButton) {
             next();
-        }else if(e.getSource() instanceof UndoButton){
+        } else if (e.getSource() instanceof UndoButton) {
             undo();
         }
     }

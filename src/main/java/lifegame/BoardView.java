@@ -3,7 +3,7 @@ package lifegame;
 import javax.swing.*;
 import java.awt.*;
 
-public class BoardView extends JPanel {
+public class BoardView extends JPanel implements BoardListener {
     private final BoardModel model;
     private final int cols;
     private final int rows;
@@ -12,6 +12,11 @@ public class BoardView extends JPanel {
         this.model = model;
         this.cols = model.getCol();
         this.rows = model.getRow();
+    }
+
+    @Override
+    public void update(final BoardModel boardModel) {
+        repaint();
     }
 
     @Override

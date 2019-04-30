@@ -42,9 +42,11 @@ public class Main implements Runnable {
 		nextButton.addActionListener(model);
 		buttonPanel.add(nextButton);
 
-		final JButton undoButton = new UndoButton();
-		undoButton.setText("UNDO");
+		final UndoButton undoButton = new UndoButton();
+		model.addListeners(undoButton);
+		undoButton.setText("UNDO(remaining 0)");
 		undoButton.addActionListener(model);
+		undoButton.setEnabled(false);
 		buttonPanel.add(undoButton);
 
 		frame.pack();
