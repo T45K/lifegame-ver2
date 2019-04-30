@@ -28,7 +28,7 @@ public class Main implements Runnable {
 		base.setPreferredSize(new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT));
 		frame.setMinimumSize(new Dimension(MINIMUM_WIDTH, MINIMUM_HEIGHT));
 
-		final BoardView view = new BoardView();
+		final BoardView view = new BoardView(10,10);
 		base.setLayout(new BorderLayout());
 		base.add(view, BorderLayout.CENTER);
 
