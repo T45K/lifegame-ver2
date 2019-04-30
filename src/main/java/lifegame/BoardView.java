@@ -29,9 +29,9 @@ public class BoardView extends JPanel implements BoardListener, MouseListener, M
         final int colsStartPoint = calcViewPaintStartPoint(cellSize, cols, getHeight());
         final int rowsStartPoint = calcViewPaintStartPoint(cellSize, rows, getWidth());
 
-        final int x = (e.getX() - rowsStartPoint)/cellSize;
-        final int y = (e.getY() - colsStartPoint)/cellSize;
-        model.changeCellState(x,y);
+        final int x = (e.getX() - rowsStartPoint) / cellSize;
+        final int y = (e.getY() - colsStartPoint) / cellSize;
+        model.changeCellState(x, y);
     }
 
     @Override

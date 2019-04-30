@@ -45,6 +45,11 @@ public class BoardModel implements ActionListener {
     }
 
     public void changeCellState(final int x, final int y) {
+        if (this.boardHistory.size() == MAX_STACK_SIZE - 1) {
+            boardHistory.removeFirst();
+        }
+
+        this.boardHistory.add(this.board.clone());
         this.board[x][y] = !this.board[x][y];
         fireUpdate();
     }
