@@ -2,8 +2,11 @@ package lifegame;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 
-public class BoardView extends JPanel implements BoardListener {
+public class BoardView extends JPanel implements BoardListener, MouseListener, MouseMotionListener {
     private final BoardModel model;
     private final int cols;
     private final int rows;
@@ -12,6 +15,44 @@ public class BoardView extends JPanel implements BoardListener {
         this.model = model;
         this.cols = model.getCol();
         this.rows = model.getRow();
+        this.addMouseListener(this);
+        this.addMouseMotionListener(this);
+    }
+
+    @Override
+    public void mouseClicked(final MouseEvent e) {
+    }
+
+    @Override
+    public void mousePressed(final MouseEvent e) {
+        final int cellSize = Math.min(getHeight() / cols, getWidth() / rows);
+        final int colsStartPoint = calcViewPaintStartPoint(cellSize, cols, getHeight());
+        final int rowsStartPoint = calcViewPaintStartPoint(cellSize, rows, getWidth());
+
+        final int x = (e.getX() - rowsStartPoint)/cellSize;
+        final int y = (e.getY() - colsStartPoint)/cellSize;
+        model.changeCellState(x,y);
+    }
+
+    @Override
+    public void mouseReleased(final MouseEvent e) {
+    }
+
+    @Override
+    public void mouseEntered(final MouseEvent e) {
+    }
+
+    @Override
+    public void mouseExited(final MouseEvent e) {
+    }
+
+    @Override
+    public void mouseDragged(final MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseMoved(final MouseEvent e) {
     }
 
     @Override

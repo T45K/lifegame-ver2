@@ -30,6 +30,7 @@ public class Main implements Runnable {
 
 		final BoardModel model = new BoardModel(10, 10);
 		final BoardView view = new BoardView(model);
+		model.addListeners(view);
 		base.setLayout(new BorderLayout());
 		base.add(view, BorderLayout.CENTER);
 
