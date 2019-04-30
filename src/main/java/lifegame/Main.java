@@ -1,10 +1,11 @@
 package lifegame;
 
+import lifegame.button.NextButton;
+import lifegame.button.UndoButton;
+
 import java.awt.*;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 
 public class Main implements Runnable {
 	final static private String WINDOW_TITLE = "lifegame";
@@ -27,13 +28,22 @@ public class Main implements Runnable {
 		base.setPreferredSize(new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT));
 		frame.setMinimumSize(new Dimension(MINIMUM_WIDTH, MINIMUM_HEIGHT));
 
-		final BoardView view = new BoardView(new BoardModel(10,10));
+		final BoardModel model = new BoardModel(10, 10);
+		final BoardView view = new BoardView(model);
 		base.setLayout(new BorderLayout());
 		base.add(view, BorderLayout.CENTER);
 
 		final JPanel buttonPanel = new JPanel();
 		base.add(buttonPanel,BorderLayout.SOUTH);
 		buttonPanel.setLayout(new FlowLayout());
+
+		final JButton nextButton = new NextButton();
+		nextButton.addActionListener(model);
+		buttonPanel.add(nextButton);
+
+		final JButton undoButton = new UndoButton();
+		undoButton.addActionListener(model);
+		buttonPanel.add(undoButton);
 
 		frame.pack();
 		frame.setVisible(true);
