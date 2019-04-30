@@ -31,7 +31,7 @@ public class BoardModel {
 		}
 	}
 
-	private boolean isAlive(final int x, final int y) {
+	public boolean isAlive(final int x, final int y) {
 		return isInField(x, y) && this.board[x][y];
 	}
 

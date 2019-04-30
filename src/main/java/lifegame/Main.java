@@ -1,7 +1,6 @@
 package lifegame;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
+import java.awt.*;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -28,9 +27,13 @@ public class Main implements Runnable {
 		base.setPreferredSize(new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT));
 		frame.setMinimumSize(new Dimension(MINIMUM_WIDTH, MINIMUM_HEIGHT));
 
-		final BoardView view = new BoardView(10,10);
+		final BoardView view = new BoardView(new BoardModel(10,10));
 		base.setLayout(new BorderLayout());
 		base.add(view, BorderLayout.CENTER);
+
+		final JPanel buttonPanel = new JPanel();
+		base.add(buttonPanel,BorderLayout.SOUTH);
+		buttonPanel.setLayout(new FlowLayout());
 
 		frame.pack();
 		frame.setVisible(true);
