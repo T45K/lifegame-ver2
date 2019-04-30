@@ -38,10 +38,12 @@ public class Main implements Runnable {
 		buttonPanel.setLayout(new FlowLayout());
 
 		final JButton nextButton = new NextButton();
+		nextButton.setText("NEXT");
 		nextButton.addActionListener(model);
 		buttonPanel.add(nextButton);
 
 		final JButton undoButton = new UndoButton();
+		undoButton.setText("UNDO");
 		undoButton.addActionListener(model);
 		buttonPanel.add(undoButton);
 
