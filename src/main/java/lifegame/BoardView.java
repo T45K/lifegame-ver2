@@ -59,6 +59,12 @@ public class BoardView extends JPanel implements MouseListener, MouseMotionListe
         final int x = (e.getX() - rowsStartPoint) / cellSize;
         final int y = (e.getY() - colsStartPoint) / cellSize;
 
+        if(!model.isInField(x,y)){
+            draggingXPoint = -1;
+            draggingYPoint = -1;
+            return;
+        }
+
         if (x != draggingXPoint || y != draggingYPoint) {
             model.changeCellState(x, y);
         }

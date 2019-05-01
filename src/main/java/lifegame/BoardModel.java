@@ -40,7 +40,7 @@ public class BoardModel implements ActionListener {
         return isInField(x, y) && this.board[x][y];
     }
 
-    private boolean isInField(final int x, final int y) {
+    public boolean isInField(final int x, final int y) {
         return x >= 0 && x < row && y >= 0 && y < col;
     }
 
