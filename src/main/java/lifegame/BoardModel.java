@@ -49,7 +49,7 @@ public class BoardModel implements ActionListener {
             boardHistory.removeFirst();
         }
 
-        this.boardHistory.add(this.board.clone());
+        this.boardHistory.add(copyBoard(this.board));
         this.board[x][y] = !this.board[x][y];
         fireUpdate();
     }
@@ -88,7 +88,7 @@ public class BoardModel implements ActionListener {
             boardHistory.removeFirst();
         }
 
-        this.boardHistory.addLast(this.board.clone());
+        this.boardHistory.addLast(copyBoard(this.board));
         this.board = getNextBoard();
         fireUpdate();
     }
@@ -113,5 +113,16 @@ public class BoardModel implements ActionListener {
         } else if (e.getSource() instanceof UndoButton) {
             undo();
         }
+    }
+
+    private boolean[][] copyBoard(final boolean[][] board) {
+        final boolean[][] copiedBoard = new boolean[row][col];
+        for (int x = 0; x < row; x++) {
+            if (col >= 0) {
+                System.arraycopy(board[x], 0, copiedBoard[x], 0, col);
+            }
+        }
+
+        return copiedBoard;
     }
 }

@@ -23,14 +23,14 @@ public class Main implements Runnable {
 		frame.setTitle(WINDOW_TITLE);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-		final JPanel base = new JPanel();
+		final MyJPanel base = new MyJPanel();
 		frame.setContentPane(base);
 		base.setPreferredSize(new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT));
 		frame.setMinimumSize(new Dimension(MINIMUM_WIDTH, MINIMUM_HEIGHT));
 
 		final BoardModel model = new BoardModel(10, 10);
 		final BoardView view = new BoardView(model);
-		model.addListeners(view);
+		model.addListeners(base);
 		base.setLayout(new BorderLayout());
 		base.add(view, BorderLayout.CENTER);
 
@@ -38,7 +38,7 @@ public class Main implements Runnable {
 		base.add(buttonPanel,BorderLayout.SOUTH);
 		buttonPanel.setLayout(new FlowLayout());
 
-		final JButton nextButton = new NextButton();
+		final NextButton nextButton = new NextButton();
 		nextButton.setText("NEXT");
 		nextButton.addActionListener(model);
 		buttonPanel.add(nextButton);
